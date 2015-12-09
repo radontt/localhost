@@ -42,8 +42,3 @@ def resave_hosts(file_path, insert = None, mark = None) :
     f_hosts.write(mark['end'] + '\n')
 
   f_hosts.close()
-
-
-insert = [{ 'ip' : '10.10.10.10', 'sites': 'test.cm1'}, { 'ip' : '10.10.10.11', 'sites': 'test1.cm2 test2.cm2'}]
-
-resave_hosts('hosts', insert)
