@@ -1,5 +1,22 @@
 #!/usr/bin/env python3
 
+class Hosts :
+  a_share_hosts = []
+  a_my_hosts = []
+  file_path = '/etc/hosts'
+  error = {}
+
+  def __init__(self, file_path = None) :
+    if file_path is not None :
+      self.file_path = file_path
+
+    # Check file exist
+    f_hosts = open(file_path, 'r')
+
+    #FIXME Check root permission
+
+
+#############################################################
 def resave_hosts(file_path, insert = None, mark = None) :
   if mark is None :
     mark = { 'start': '### auto_hosts-start', 'end' : '### auto_hosts-end' }
