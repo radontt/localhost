@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 import hosts
+import load_conf
 
-insert = [{ 'ip': '10.10.10.10', 'sites': ['test.cm1']}, { 'ip': '10.10.10.11', 'sites': ['test1.cm2', 'test2.cm2']}]
+
+
+
+##########################################
+conf = load_conf.load_conf('tmp/main-sites.conf')
+insert = load_conf.get_conf_hosts(conf)
 hosts.resave_hosts('tmp/hosts', insert)

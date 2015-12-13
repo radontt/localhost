@@ -18,10 +18,3 @@ def get_conf_hosts(conf) :
       if len(site_list) :
         a_hosts.append({'ip': ip, 'sites': site_list})
   return a_hosts
-
-
-
-##########################################
-conf = load_conf('tmp/main-sites.conf')
-hosts = get_conf_hosts(conf)
-print (hosts)

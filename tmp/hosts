@@ -20,6 +20,6 @@ ff02::2 ip6-allrouters
 
 
 ### auto_hosts-start
-10.10.10.10  test.cm1
-10.10.10.11  test1.cm2 test2.cm2
+10.10.10.10  d7.lc test.lc
+192.168.100.1  drupal7.lc
 ### auto_hosts-end
