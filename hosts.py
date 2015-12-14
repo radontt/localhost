@@ -15,7 +15,7 @@ class Hosts:
     if mark is not None:
       self.mark = mark
 
-    load()
+    self.load()
 
   # Hosts file load.
   def load(self, file_path = None):
@@ -24,7 +24,7 @@ class Hosts:
     f_curr = 'share'
 
     tmp_path = file_path if file_path is not None else self.file_path
-    if os.path.isfile(tmp_path) == False or os.access(tmp_path, os.R_OK):
+    if os.path.isfile(tmp_path) == False or os.access(tmp_path, os.R_OK) == False:
       self.errors.append({'file_not_exists': 'File "hosts" not exists'})
       return False
 
@@ -33,17 +33,17 @@ class Hosts:
       self.file_path = file_path
 
     # File loads.
-    for s_line in open(self.file_path, 'r') :
+    for s_line in open(self.file_path, 'r'):
       s_line = s_line.strip()
       if len(s_line) > 1 :
-        if s_line == mark['start'] :
+        if s_line ==self. mark['start']:
           f_curr = 'my'
           continue
-        if s_line == mark['end'] :
+        if s_line == self.mark['end']:
           f_curr = 'share'
           continue
 
-      if f_curr == 'share' :
+      if f_curr == 'share':
         self.a_share_hosts.append(s_line)
       else:
         if len(s_line) > 1:
@@ -51,7 +51,7 @@ class Hosts:
     return True
 
   # Hosts file save.
-  def save(self, insert = None) :
+  def save(self, insert = None):
     f_hosts = open(self.file_path, 'w')
     i_br = 0
     for s_line in self.a_share_hosts :
@@ -59,12 +59,12 @@ class Hosts:
       if i_br < 3 :
         f_hosts.write(s_line + '\n')
 
-    if insert is not None :
+    if insert is not None:
       if i_br < 3 :
         f_hosts.write('\n')
-      f_hosts.write(mark['start'] + '\n')
-      for s_line in insert :
+      f_hosts.write(self.mark['start'] + '\n')
+      for s_line in insert:
         f_hosts.write(s_line['ip'] + '  ' + ' '.join(s_line['sites']) + '\n')
-      f_hosts.write(mark['end'] + '\n')
+      f_hosts.write(self.mark['end'] + '\n')
 
     f_hosts.close()

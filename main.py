@@ -64,8 +64,7 @@ win.connect('delete-event', Gtk.main_quit)
 win.show_all()
 Gtk.main()
 
-
-##########################################
-# conf = load_conf.load_conf('tmp/main-sites.conf')
-# insert = load_conf.get_conf_hosts(conf)
-# hosts.resave_hosts('tmp/hosts', insert)
+c_conf = load_conf.Config('tmp/main-sites.yml')
+insert = c_conf.get_hosts()
+c_hosts = hosts.Hosts('tmp/hosts')
+c_hosts.save(insert)
