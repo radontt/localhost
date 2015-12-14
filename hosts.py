@@ -55,7 +55,7 @@ def resave_hosts(file_path, insert = None, mark = None) :
       f_hosts.write('\n')
     f_hosts.write(mark['start'] + '\n')
     for s_line in insert :
-      f_hosts.write(s_line['ip'] + '  ' + s_line['sites'] + '\n')
+      f_hosts.write(s_line['ip'] + '  ' + ' '.join(s_line['sites']) + '\n')
     f_hosts.write(mark['end'] + '\n')
 
   f_hosts.close()

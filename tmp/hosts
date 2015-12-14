@@ -1,0 +1,25 @@
+127.0.0.1 localhost
+
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+
+192.168.1.32  d7.t14 pa.id test.id srv14.my
+
+
+192.168.1.128  d7.lc d8.lc test.lc srv.lc media.ax france.ax
+192.168.1.128 veo_296.ax veo_146.ax veo_771.ax veo_1121.ax
+
+
+192.168.10.3    d7.wh d8.wh test.wh srv.wh
+
+
+### auto_hosts-start
+10.10.10.10  d7.lc test.lc
+192.168.100.1  drupal7.lc
+### auto_hosts-end

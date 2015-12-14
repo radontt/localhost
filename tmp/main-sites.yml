@@ -1,0 +1,21 @@
+10.10.10.10:
+  status: 1
+
+  sites:
+    d7.lc:
+      path: d7.lc/www
+      https: 1
+      status: 1
+
+    test.lc:
+      path: test.lc/www
+
+192.168.100.1:
+
+  sites:
+    drupal7.lc:
+      path: drupal7.lc/www
+
+    drupal8.lc:
+      path: drupal8.lc/www
+      status: 0
