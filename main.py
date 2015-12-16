@@ -3,12 +3,13 @@ from gi.repository import Gtk
 import hosts
 import load_conf
 
-
 class MyWindow(Gtk.Window):
+  c_conf = None
 
   def __init__(self):
-    Gtk.Window.__init__(self, title='Localhost server')
+    self.c_conf = load_conf.Config('tmp/main-sites.yml')
 
+    Gtk.Window.__init__(self, title='Localhost server')
     self.set_border_width(10)
     box_vert = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
     self.add(box_vert)
@@ -24,33 +25,29 @@ class MyWindow(Gtk.Window):
     switch.set_active(False)
     box_header.pack_end(switch, False, True, 0)
 
-    # IP + site
-    # Line 1
-    box_l1 = Gtk.Box(spacing=4)
-    box_vert.pack_start(box_l1, True, True, 0)
+    for ip in self.c_conf.conf:
+      box = Gtk.Box(spacing=4)
+      box_vert.pack_start(box, True, True, 0)
 
-    text_l1 = Gtk.Label('192.168.11.10')
-    box_l1.pack_start(text_l1, False, True, 0)
-    btnc_l1 = Gtk.CheckButton()
-    box_l1.pack_end(btnc_l1, False, False, 0)
+      text = Gtk.Label(ip)
+      box.pack_start(text, False, True, 0)
+      btnc = Gtk.CheckButton()
+      if 'status' not in self.c_conf.conf[ip] or self.c_conf.conf[ip]['status'] == 1:
+        btnc.set_active(True)
+      # FIXME connect event
+      box.pack_end(btnc, False, False, 0)
 
-    # Line 2
-    box_l2 = Gtk.Box(spacing=4)
-    box_vert.pack_start(box_l2, True, True, 0)
+      a_sites = self.c_conf.conf[ip]['sites']
+      for item in a_sites:
+        box = Gtk.Box(spacing=4)
+        box_vert.pack_start(box, True, True, 0)
 
-    text_l2 = Gtk.Label('       ' + 'drupal7.lc')
-    box_l2.pack_start(text_l2, False, True, 0)
-    btnc_l2 = Gtk.CheckButton()
-    box_l2.pack_end(btnc_l2, False, False, 0)
-
-    # Line 3
-    box_l3 = Gtk.Box(spacing=4)
-    box_vert.pack_start(box_l3, True, True, 0)
-
-    text_l3 = Gtk.Label('       ' + 'test.lc')
-    box_l3.pack_start(text_l3, False, True, 0)
-    btnc_l3 = Gtk.CheckButton()
-    box_l3.pack_end(btnc_l3, False, False, 0)
+        text = Gtk.Label('       ' + item)
+        box.pack_start(text, False, True, 0)
+        btnc = Gtk.CheckButton()
+        if 'status' not in a_sites[item] or a_sites[item]['status'] == 1:
+          btnc.set_active(True)
+        box.pack_end(btnc, False, False, 0)
 
   def on_switch_activated(self, switch, gparam):
     if switch.get_active():
@@ -64,7 +61,7 @@ win.connect('delete-event', Gtk.main_quit)
 win.show_all()
 Gtk.main()
 
-c_conf = load_conf.Config('tmp/main-sites.yml')
-insert = c_conf.get_hosts()
-c_hosts = hosts.Hosts('tmp/hosts')
-c_hosts.save(insert)
+# c_conf = load_conf.Config('tmp/main-sites.yml')
+# insert = c_conf.get_hosts()
+# c_hosts = hosts.Hosts('tmp/hosts')
+# c_hosts.save(insert)
