@@ -49,6 +49,21 @@ class MyWindow(Gtk.Window):
           btnc.set_active(True)
         box.pack_end(btnc, False, False, 0)
 
+    box_footer = Gtk.Box(spacing=4)
+    box_vert.pack_start(box_footer, True, True, 0)
+
+    btn_reload = Gtk.Button.new_with_label('Reload')
+    btn_reload.connect('clicked', self.on_click_reload_conf)
+    box_footer.pack_start(btn_reload, True, True, 0)
+
+
+    btn_save = Gtk.Button.new_with_label('Save configuration')
+    box_footer.pack_start(btn_save, True, True, 0)
+
+
+  def on_click_reload_conf(self, button):
+    print ('Click')
+
   def on_switch_activated(self, switch, gparam):
     if switch.get_active():
       state = 'on'
