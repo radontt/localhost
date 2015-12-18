@@ -5,19 +5,34 @@ import os
 class MyWindow(Gtk.Window):
 
   def __init__(self):
-    Gtk.Window.__init__(self, title='Docker server')
-    self.set_border_width(10)
-    box_vert = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-    self.add(box_vert)
+    Gtk.Window.__init__(self, title="Simple Notebook Example")
+    self.set_border_width(4)
 
-    box_header = Gtk.Box(spacing=4)
-    box_vert.pack_start(box_header, True, True, 0)
+    self.notebook = Gtk.Notebook()
+    self.add(self.notebook)
 
-    p = os.popen ('docker -v')
-    self.server_status = Gtk.Label(p.readline())
-    box_header.pack_start(self.server_status, False, True, 0)
+    self.p_list = Gtk.Box()
+    self.p_list.set_border_width(10)
+    self.p_list.add(Gtk.Label('List of dockers'))
+    self.notebook.append_page(self.p_list, Gtk.Label('Status'))
+
+    self.p_images = Gtk.Box()
+    self.p_images.set_border_width(10)
+    self.p_images.add(Gtk.Label('List of images'))
+    self.notebook.append_page(self.p_images, Gtk.Label('Images'))
+
+    self.p_about = Gtk.Box()
+    self.p_about.set_border_width(10)
+    p = os.popen('docker version')
+    line = True
+    version = ''
+    while line:
+      line = p.readline()
+      version = version + line
+    self.p_about.add(Gtk.Label(version))
+    self.notebook.append_page(self.p_about, Gtk.Label('About'))
 
 win = MyWindow()
-win.connect('delete-event', Gtk.main_quit)
+win.connect("delete-event", Gtk.main_quit)
 win.show_all()
 Gtk.main()
