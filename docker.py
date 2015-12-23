@@ -2,10 +2,21 @@
 from gi.repository import Gtk
 import os
 
-class MyWindow(Gtk.Window):
 
+class DialogAddDocker(Gtk.Dialog):
+  def __init__(self, parent):
+    Gtk.Dialog.__init__(self, 'Add Docker', parent, 0,
+        (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK))
+    self.set_default_size(150, 100)
+    label = Gtk.Label("This is a dialog to display additional information")
+    box = self.get_content_area()
+    box.add(label)
+    self.show_all()
+
+
+class MyWindow(Gtk.Window):
   def __init__(self):
-    Gtk.Window.__init__(self, title="Simple Notebook Example")
+    Gtk.Window.__init__(self, title='Docker localhost')
     self.set_border_width(4)
 
     self.notebook = Gtk.Notebook()
@@ -18,6 +29,12 @@ class MyWindow(Gtk.Window):
     l_status.set_halign(Gtk.Align.START)
     self.p_list.pack_start(l_status, False, False, 0)
     self.notebook.append_page(self.p_list, Gtk.Label('Status'))
+
+    box_footer = Gtk.Box()
+    self.p_list.pack_end(box_footer, False, False, 0)
+    btn_add_docker = Gtk.Button.new_with_label('Add docker')
+    btn_add_docker.connect('clicked', self.on_click_add_docker)
+    box_footer.pack_start(btn_add_docker, False, False, 0)
 
     # Proccess tab
     self.p_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -60,6 +77,16 @@ class MyWindow(Gtk.Window):
     l_version.set_halign(Gtk.Align.START)
     self.p_about.pack_start(l_version, False, False, 0)
     self.notebook.append_page(self.p_about, Gtk.Label('About'))
+
+  def on_click_add_docker(self, button):
+    dialog = DialogAddDocker(self)
+    response = dialog.run()
+    if response == Gtk.ResponseType.OK:
+      print("The OK button was clicked")
+    elif response == Gtk.ResponseType.CANCEL:
+      print("The Cancel button was clicked")
+    dialog.destroy()
+
 
 win = MyWindow()
 win.connect("delete-event", Gtk.main_quit)
