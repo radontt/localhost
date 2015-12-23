@@ -11,6 +11,13 @@ class MyWindow(Gtk.Window):
     self.notebook = Gtk.Notebook()
     self.add(self.notebook)
 
+    # Status (Main) tab
+    self.p_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+    self.p_list.set_border_width(10)
+    self.p_list.pack_start(Gtk.Label('Config / Add new'), False, False, 0)
+    self.notebook.append_page(self.p_list, Gtk.Label('Status'))
+
+    # Proccess tab
     self.p_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
     self.p_list.set_border_width(10)
     p = os.popen('docker ps -a')
@@ -20,8 +27,9 @@ class MyWindow(Gtk.Window):
       line = p.readline()
       s_ps = s_ps + line
     self.p_list.pack_start(Gtk.Label(s_ps), False, False, 0)
-    self.notebook.append_page(self.p_list, Gtk.Label('Status'))
+    self.notebook.append_page(self.p_list, Gtk.Label('Proccess'))
 
+    # Images tab
     self.p_images = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
     self.p_images.set_border_width(10)
     p = os.popen('docker images')
@@ -33,6 +41,7 @@ class MyWindow(Gtk.Window):
     self.p_images.pack_start(Gtk.Label(images), False, True, 0)
     self.notebook.append_page(self.p_images, Gtk.Label('Images'))
 
+    # About tab
     self.p_about = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
     self.p_about.set_border_width(10)
     p = os.popen('docker version')
