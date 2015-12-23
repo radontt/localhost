@@ -14,7 +14,9 @@ class MyWindow(Gtk.Window):
     # Status (Main) tab
     self.p_list = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
     self.p_list.set_border_width(10)
-    self.p_list.pack_start(Gtk.Label('Config / Add new'), False, False, 0)
+    l_status = Gtk.Label('Config / Add new')
+    l_status.set_halign(Gtk.Align.START)
+    self.p_list.pack_start(l_status, False, False, 0)
     self.notebook.append_page(self.p_list, Gtk.Label('Status'))
 
     # Proccess tab
@@ -26,7 +28,9 @@ class MyWindow(Gtk.Window):
     while line:
       line = p.readline()
       s_ps = s_ps + line
-    self.p_list.pack_start(Gtk.Label(s_ps), False, False, 0)
+    l_proccess = Gtk.Label(s_ps)
+    l_proccess.set_halign(Gtk.Align.START)
+    self.p_list.pack_start(l_proccess, False, False, 0)
     self.notebook.append_page(self.p_list, Gtk.Label('Proccess'))
 
     # Images tab
@@ -38,7 +42,9 @@ class MyWindow(Gtk.Window):
     while line:
       line = p.readline()
       images = images + line
-    self.p_images.pack_start(Gtk.Label(images), False, True, 0)
+    l_images = Gtk.Label(images)
+    l_images.set_halign(Gtk.Align.START)
+    self.p_images.pack_start(l_images, False, True, 0)
     self.notebook.append_page(self.p_images, Gtk.Label('Images'))
 
     # About tab
@@ -50,7 +56,9 @@ class MyWindow(Gtk.Window):
     while line:
       line = p.readline()
       version = version + line
-    self.p_about.pack_start(Gtk.Label(version), False, False, 0)
+    l_version = Gtk.Label(version)
+    l_version.set_halign(Gtk.Align.START)
+    self.p_about.pack_start(l_version, False, False, 0)
     self.notebook.append_page(self.p_about, Gtk.Label('About'))
 
 win = MyWindow()
