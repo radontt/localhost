@@ -3,15 +3,16 @@ from gi.repository import Gtk
 import os
 
 
-class DialogAddDocker(Gtk.Dialog):
-  def __init__(self, parent):
-    Gtk.Dialog.__init__(self, 'Add Docker', parent, 0,
-        (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK))
-    self.set_default_size(150, 100)
-    label = Gtk.Label("This is a dialog to display additional information")
-    box = self.get_content_area()
-    box.add(label)
-    self.show_all()
+class DialogAddDockerHandler:
+  def on_delete_dialog(self, *args):
+    print ('end')
+    #FIXME Gtk.main_quit(*args)
+
+  def on_clicked_add(self, button):
+    print('Add new conf, close dialog')
+
+  def on_clicked_cancel(self, button):
+    print('Cancel new conf, close dialog')
 
 
 class MyWindow(Gtk.Window):
@@ -79,13 +80,11 @@ class MyWindow(Gtk.Window):
     self.notebook.append_page(self.p_about, Gtk.Label('About'))
 
   def on_click_add_docker(self, button):
-    dialog = DialogAddDocker(self)
-    response = dialog.run()
-    if response == Gtk.ResponseType.OK:
-      print("The OK button was clicked")
-    elif response == Gtk.ResponseType.CANCEL:
-      print("The Cancel button was clicked")
-    dialog.destroy()
+    builder = Gtk.Builder()
+    builder.add_from_file('layout/add_docker.glade')
+    builder.connect_signals(DialogAddDockerHandler())
+    dialog = builder.get_object('dialog_add_docker')
+    dialog.show()
 
 
 win = MyWindow()
