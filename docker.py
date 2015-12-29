@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from gi.repository import Gtk
-import os, time
+import os, time, yaml
 import os.path
 
 class DockerHost:
@@ -71,18 +71,20 @@ class DockerHost:
 
   # Add Docker Dialog.
   def on_btn_cancel_clicked(self, button):
-    clear_add_docker_dialog()
+    self.clear_add_docker_dialog()
 
   def on_bnt_add_docker_clicked(self, button):
-    if self.en_local_name.get_text() not in self.conf['dockers']:
+    if len(self.conf['dockers']) == 0 or self.en_local_name.get_text() not in self.conf['dockers']:
       self.conf['dockers'][self.en_local_name.get_text()] = {
         'repo_name': self.en_repo_name.get_text(),
         'addon_param': self.en_addon_param.get_text(),
         'mount_path': self.en_mount_path.get_text()
       }
-    clear_add_docker_dialog()
+      with open(self.conf_path + '/docker.yml', 'w') as f_conf:
+        f_conf.write(yaml.dump(self.conf, default_flow_style=False))
+    self.clear_add_docker_dialog()
 
-  def clear_add_docker_dialog():
+  def clear_add_docker_dialog(self):
     self.en_local_name.set_text('')
     self.en_repo_name.set_text('')
     self.en_addon_param.set_text('')
