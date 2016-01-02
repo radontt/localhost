@@ -4,7 +4,7 @@ import os
 import os.path
 import sqlite3
 
-curr_dir = 'root'
+curr_dir = 'tmp/root'
 curr_id = 1
 con = sqlite3.connect('test.db')
 cur = con.cursor()
