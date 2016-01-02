@@ -432,14 +432,36 @@
             <property name="can_focus">True</property>
             <signal name="switch-page" handler="on_notebook1_switch_page" swapped="no"/>
             <child>
-              <object class="GtkLabel" id="lab_status">
+              <object class="GtkVBox" id="vbox2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">label</property>
+                <child>
+                  <object class="GtkLabel" id="lab_status">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">label</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkVBox" id="box_status">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
-              <packing>
-                <property name="tab_fill">False</property>
-              </packing>
             </child>
             <child type="tab">
               <object class="GtkLabel" id="tab_status">

@@ -35,9 +35,11 @@ class DockerHost:
     self.en_addon_param = self.builder.get_object('en_addon_param')
     self.en_mount_path = self.builder.get_object('en_mount_path')
 
+    self.lab_status = self.builder.get_object('lab_status')
+    self.box_status = self.builder.get_object('box_status')
+
     self.statusbar = self.builder.get_object('status_bar')
     self.context_id = self.statusbar.get_context_id('status')
-    self.statusbar.push(0, "Refreshed - {0}".format(time.ctime()))
 
     self.notebook = self.builder.get_object('notebook1')
     self.on_notebook1_switch_page(self.notebook, '', 0)
@@ -68,6 +70,32 @@ class DockerHost:
     if name_label in self.d_tabs:
       tab_content.set_halign(Gtk.Align.START)
       tab_content.set_text(self.get_docker_command(self.d_tabs[name_label]))
+    elif name_label == 'Status':
+      count_dockers = len(self.conf['dockers'])
+      self.lab_status.set_halign(Gtk.Align.START)
+      self.lab_status.set_text('Count of dockers - {0}'.format(count_dockers))
+
+      children = self.box_status.get_children()
+      for child in children:
+        child.destroy()
+      print (count_dockers) #FIXME
+      if count_dockers:
+        box_row = Gtk.Box(spacing=6)
+        self.box_status.pack_start(box_row, False, False, 0)
+
+        label = Gtk.Label()
+        label.set_text('Docker 1')
+        label.set_justify(Gtk.Justification.LEFT)
+        box_row.pack_start(label, True, True, 0)
+
+        switch = Gtk.Switch()
+        box_row.pack_end(switch, False, False, 0)
+
+        button = Gtk.Button.new_with_label('Edit')
+        #button.connect("clicked", self.on_click_me_clicked)
+        box_row.pack_end(button, True, True, 0)
+
+    self.statusbar.push(0, "Refreshed - {0}".format(time.ctime()))
 
   # Add Docker Dialog.
   def on_btn_cancel_clicked(self, button):
