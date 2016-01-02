@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from gi.repository import Gtk
-import hosts
-import load_conf
+from lib import hosts
+from lib import load_conf
 
 class MyWindow(Gtk.Window):
   c_conf = None
@@ -76,7 +76,7 @@ win.connect('delete-event', Gtk.main_quit)
 win.show_all()
 Gtk.main()
 
-# c_conf = load_conf.Config('tmp/main-sites.yml')
-# insert = c_conf.get_hosts()
-# c_hosts = hosts.Hosts('tmp/hosts')
-# c_hosts.save(insert)
+c_conf = load_conf.Config('tmp/main-sites.yml')
+insert = c_conf.get_hosts()
+c_hosts = hosts.Hosts('tmp/hosts')
+c_hosts.save(insert)
