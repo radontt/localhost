@@ -237,10 +237,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="entry1">
+              <object class="GtkEntry" id="en_docker_db_name">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">●</property>
+                <property name="text" translatable="yes">{project}-db</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
@@ -254,10 +255,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="entry2">
+              <object class="GtkEntry" id="en_db_mount">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">●</property>
+                <property name="text" translatable="yes">{project}/mysql</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
@@ -271,10 +273,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="entry3">
+              <object class="GtkEntry" id="en_db_user">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">●</property>
+                <property name="text" translatable="yes">{project}</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
@@ -288,10 +291,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="entry4">
+              <object class="GtkEntry" id="en_db_base">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">●</property>
+                <property name="text" translatable="yes">{project}</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
@@ -305,10 +309,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="entry5">
+              <object class="GtkEntry" id="en_db_pass">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">●</property>
+                <property name="text" translatable="yes">{project}</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
@@ -322,10 +327,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="entry6">
+              <object class="GtkEntry" id="en_docker_php_name">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">●</property>
+                <property name="text" translatable="yes">{project}-php</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
@@ -339,10 +345,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="entry7">
+              <object class="GtkEntry" id="en_php_mount">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">●</property>
+                <property name="text" translatable="yes">{project}/www</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">True</property>
